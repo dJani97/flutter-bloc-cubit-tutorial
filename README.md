@@ -1,12 +1,10 @@
-# Flutter Bloc & Cubit Tutorial
+# Using Flutter Hydrated Bloc with Flutter Secure Storage
 
-### Learn from :point_right: [this post](https://resocoder.com/flutter-bloc-cubit) :point_left:.
+This powerful combination allows developers to persist their app's state directly into a secure storage.
 
-#### _Find more tutorials on [resocoder.com](https://resocoder.com)_
+Main packages used:
+ * [bloc](https://pub.dev/packages/flutter_bloc)
+ * [hydrated_bloc](https://pub.dev/packages/hydrated_bloc)
+ * [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
 
-<br />
-<br />
-
-[![Reso Coder](https://resocoder.com/wp-content/uploads/2019/09/logo_with_text_signature.png)](https://resocoder.com)
-<br />
-_Be prepared for **real** app development_
+Reso Coder's [Flutter Bloc & Cubit Tutorial](https://github.com/ResoCoder/flutter-bloc-cubit-tutorial) was used as a base for this project.

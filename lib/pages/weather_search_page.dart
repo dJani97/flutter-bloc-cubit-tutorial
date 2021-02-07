@@ -19,30 +19,25 @@ class _WeatherSearchPageState extends State<WeatherSearchPage> {
         padding: EdgeInsets.symmetric(vertical: 16),
         alignment: Alignment.center,
         child: BlocConsumer<WeatherCubit, WeatherState>(
-          listener: (context, state) {
-            if (state is WeatherError) {
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            if (state is WeatherInitial) {
-              return buildInitialInput();
-            } else if (state is WeatherLoading) {
-              return buildLoading();
-            } else if (state is WeatherLoaded) {
-              return buildColumnWithData(state.weather);
-            } else {
-              // (state is WeatherError)
-              return buildInitialInput();
-            }
-          },
+          listener: showSnackBarOnError,
+          builder: (context, state) => state.maybeWhen<Widget>(
+            loading: () => buildLoading(),
+            loaded: (weather) => buildColumnWithData(weather),
+            orElse: () => buildInitialInput(),
+          ),
         ),
       ),
     );
+  }
+
+  void showSnackBarOnError(BuildContext context, WeatherState state) {
+    if (state is WeatherError) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text(state.message),
+        ),
+      );
+    }
   }
 
   Widget buildInitialInput() {
@@ -63,10 +58,7 @@ class _WeatherSearchPageState extends State<WeatherSearchPage> {
       children: <Widget>[
         Text(
           weather.cityName,
-          style: TextStyle(
-            fontSize: 40,
-            fontWeight: FontWeight.w700,
-          ),
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
         ),
         Text(
           // Display the temperature with 1 decimal place
@@ -97,7 +89,6 @@ class CityInputField extends StatelessWidget {
   }
 
   void submitCityName(BuildContext context, String cityName) {
-    final weatherCubit = context.bloc<WeatherCubit>();
-    weatherCubit.getWeather(cityName);
+    context.read<WeatherCubit>().getWeather(cityName);
   }
 }

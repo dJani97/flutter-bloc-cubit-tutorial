@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_cubit_bloc_tutorial/data/model/weather.dart';
 import 'package:flutter_cubit_bloc_tutorial/data/weather_repository.dart';
-import 'package:meta/meta.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'weather_cubit.freezed.dart';
 part 'weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {

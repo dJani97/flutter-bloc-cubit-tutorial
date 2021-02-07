@@ -1,23 +1,14 @@
-import 'package:meta/meta.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Weather {
-  final String cityName;
-  final double temperatureCelsius;
+part 'weather.freezed.dart';
+part 'weather.g.dart';
 
-  Weather({
-    @required this.cityName,
-    @required this.temperatureCelsius,
-  });
+@freezed
+abstract class Weather with _$Weather {
+  const factory Weather({
+    @required String cityName,
+    @required double temperatureCelsius,
+  }) = _Weather;
 
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is Weather &&
-        o.cityName == cityName &&
-        o.temperatureCelsius == temperatureCelsius;
-  }
-
-  @override
-  int get hashCode => cityName.hashCode ^ temperatureCelsius.hashCode;
+  factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
 }

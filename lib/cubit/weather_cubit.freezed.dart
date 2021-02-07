@@ -304,6 +304,8 @@ abstract class $WeatherLoadedCopyWith<$Res> {
           WeatherLoaded value, $Res Function(WeatherLoaded) then) =
       _$WeatherLoadedCopyWithImpl<$Res>;
   $Res call({Weather weather});
+
+  $WeatherCopyWith<$Res> get weather;
 }
 
 /// @nodoc
@@ -323,6 +325,16 @@ class _$WeatherLoadedCopyWithImpl<$Res> extends _$WeatherStateCopyWithImpl<$Res>
     return _then(WeatherLoaded(
       weather == freezed ? _value.weather : weather as Weather,
     ));
+  }
+
+  @override
+  $WeatherCopyWith<$Res> get weather {
+    if (_value.weather == null) {
+      return null;
+    }
+    return $WeatherCopyWith<$Res>(_value.weather, (value) {
+      return _then(_value.copyWith(weather: value));
+    });
   }
 }
 
